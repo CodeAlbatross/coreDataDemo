@@ -6,9 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Teacher+CoreDataProperties.h"
 
 @interface ViewController : UIViewController
-
+@property(strong,nonatomic)NSManagedObjectContext *context;//所有的增删查改的基础
+@property(strong,nonatomic)NSMutableArray *students;
+@property(strong,nonatomic)Teacher *teacher;
+@property(strong,nonatomic)NSIndexPath *indexPath;
 
 @end
 
