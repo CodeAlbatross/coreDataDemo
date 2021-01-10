@@ -20,6 +20,22 @@
 
 @implementation ViewController
 
++ (BOOL)CheckInput:(NSString *)string {
+    if (string == nil || string.length == 0) {
+        return NO;
+    }
+
+   NSCharacterSet *cs;
+
+    cs = [[NSCharacterSet characterSetWithCharactersInString:@"123456789."] invertedSet];
+
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+
+    BOOL basicTest = [string isEqualToString:filtered];
+
+    return basicTest;
+
+}
 
 - (IBAction)DataSave:(UIButton *)sender {
     
@@ -39,6 +55,15 @@
     student.score = [self.TxtScore.text floatValue];
     student.memo = self.TxtMemo.text;
     student.whoTeach = self.teacher;
+   
+    if (![ViewController CheckInput:self.TxtScore.text] || ![ViewController CheckInput:self.TxtAge.text]) {
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"输入不合法" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertVc animated:NO completion:nil];
+        [alertVc addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
+        }]];
+        [self.context deleteObject:student];
+        [self.students removeLastObject];
+    }
     NSError *err;
     if (![self.context save:&err]) {
         NSLog(@"保存时出错：%@",err);
@@ -66,6 +91,17 @@
         self.TxtTeacher.text = student.whoTeach.name;
     }
 }
+
+/**
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSCharacterSet *cs;
+    cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890n"]invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs]componentsJoinedByString:@""];
+    BOOL canChange = [string isEqualToString:filtered];
+    return canChange;
+}
+*/
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

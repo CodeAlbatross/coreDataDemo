@@ -6,9 +6,9 @@
 //
 
 #import "TableViewController.h"
-#import "Student+CoreDataProperties.h"
+#import "coreData/Student+CoreDataProperties.h"
 #import "AppDelegate.h"
-#import "Teacher+CoreDataProperties.h"
+#import "coreData/Teacher+CoreDataProperties.h"
 #import "ViewController.h"
 
 @interface TableViewController ()
@@ -20,6 +20,9 @@
 @end
 
 @implementation TableViewController
+
+
+
 
 //重写get方法
 -(NSManagedObjectContext *)context{
@@ -115,6 +118,7 @@
 -(void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
 }
+
 
 #pragma mark - Table view data source
 -(IBAction)refreshData:(UIRefreshControl *)sender{

@@ -9,6 +9,7 @@
 #import "Teacher+CoreDataProperties.h"
 
 @interface ViewController : UIViewController
++ (BOOL)CheckInput:(NSString *)string;
 @property(strong,nonatomic)NSManagedObjectContext *context;//所有的增删查改的基础
 @property(strong,nonatomic)NSMutableArray *students;
 @property(strong,nonatomic)Teacher *teacher;
